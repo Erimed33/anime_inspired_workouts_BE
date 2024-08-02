@@ -1,7 +1,20 @@
-const express = require('express')
-const app = express()
+const app = require('./app')
 
 
-app.listen(4001, () => {
-    console.log(`Server is running on port 4001`)
+// environment variables
+require('dotenv').config()
+// get port from .env
+const PORT = process.env.PORT
+
+
+app.get('/', (req, res) => {
+    res.send('<h1>This my index page!</h1>')
 })
+
+
+
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`)
+})
+
+

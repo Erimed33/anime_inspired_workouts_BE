@@ -45,7 +45,7 @@ workouts.delete('/:id', (req, res) =>{
     const delWorkoutName = deletedWorkout.title
     res.json({message: `${delWorkoutName} successfully deleted`})
     } else {
-        res.json({ error: "Workout not found"})
+        res.json({ error: "Workout not found to be deleted."})
     }
     
 })
@@ -54,8 +54,12 @@ workouts.delete('/:id', (req, res) =>{
 
 workouts.put('/:id', (req, res) =>{
     const { id } = req.params
+    if (workoutsArray[id]) {
     workoutsArray[id] = req.body
     res.status(200).json(workoutsArray[id])
+    } else {
+        res.json({ error: "Workout not updated"})
+    }
 
 })
 

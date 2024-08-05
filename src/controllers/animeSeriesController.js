@@ -42,7 +42,7 @@ animes.delete('/:id', (req, res) =>{
         const delAnimeTitle= deletedAnime.title
         res.json({message: `${delAnimeTitle} successfully deleted`})
     } else {
-        res.json({ error: "Anime not found"})
+        res.json({ error: "Anime Delete Unsuccessful"})
     }
     
 })
@@ -54,7 +54,12 @@ animes.delete('/:id', (req, res) =>{
 
 animes.put('/:id', (req, res) =>{
     const { id } =req.params
+    if (animeSeries[id]) {
     animeSeries[id] = req.body
+    res.status(200).json(animeSeries[id])
+    } else {
+        res.json({ error: "Anime cannot be updated"})
+    }
 
 
 })

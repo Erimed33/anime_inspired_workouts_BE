@@ -3,7 +3,11 @@ const express =require('express')
 
 const workouts = express.Router()
 
-const workoutsArray = require('../models/inspired_workouts')
+const workoutsArray  = require('../models/inspired_workouts')
+const { checkForTitleKey, checkForDuration,
+    checkForExercises } = require('../validations/workoutValidations')
+
+
 
 // whenever we hit workouts its goiing to route it here
 workouts.get('/', (req, res) =>{
@@ -31,7 +35,8 @@ workouts.get('/:id', (req, res) => {
 // CREATE
 
 
-workouts.post('/', (req, res) => {
+workouts.post('/', checkForTitleKey, checkForDuration,
+    checkForExercises, (req, res) => {
     workoutsArray.push(req.body)
     res.json(workoutsArray[workoutsArray.length - 1])
 })

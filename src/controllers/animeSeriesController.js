@@ -3,6 +3,7 @@ const express = require('express')
 const animes = express.Router()
 
 const animeSeries = require('../models/anime_series')
+const {checkForTitleKey } = require('../validations/animeValidations')
 
 // localhost:3300/animes/ (shows all) 
 
@@ -27,7 +28,7 @@ animes.get('/:id', (req, res) => {
 
 // CREATE 
 
-animes.post('/', (req, res) => {
+animes.post('/', checkForTitleKey, (req, res) => {
     animeSeries.push(req.body)
     res.json(animeSeries[animeSeries.length - 1])
 
@@ -52,7 +53,7 @@ animes.delete('/:id', (req, res) =>{
 
 //UPDATE
 
-animes.put('/:id', (req, res) =>{
+animes.put('/:id', checkForTitleKey, (req, res) =>{
     const { id } =req.params
     if (animeSeries[id]) {
     animeSeries[id] = req.body

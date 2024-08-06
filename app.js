@@ -1,8 +1,8 @@
 const express =require('express')
 const app = express()
 const cors = require('cors')
-const animeSeriesController = require('./src/controllers/animeSeriesController')
-const workoutController = require('./src/controllers/workoutController')
+const animeSeriesController = require('./controllers/animeSeriesController')
+const workoutController = require('./controllers/workoutController')
 require('dotenv').config()
 
 // middleware

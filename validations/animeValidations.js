@@ -1,8 +1,8 @@
 const checkForTitleKey = (req, res, next) => {
-    if(req.body.hasOwnProperty('title')) {
+    if(req.body.title) {
         next()
     } else {
-        res.json({error: "Anime must contain a title"})
+        res.status(400).json({error: "Anime must contain a title"})
     }
 }
 
